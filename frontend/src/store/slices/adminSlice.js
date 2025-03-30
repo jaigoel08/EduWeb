@@ -22,7 +22,7 @@ export const uploadNotes = createAsyncThunk(
       console.log('Token being sent:', token);
 
       const response = await axios.post(
-        'http://localhost:3000/admin/upload-notes', 
+        'https://eduweb-backend-gphf.onrender.com/admin/upload-notes', 
         formData, 
         { 
           headers: { 
@@ -57,7 +57,7 @@ export const fetchAllNotes = createAsyncThunk(
 
       console.log('Fetching notes with token:', token);
 
-      const response = await axios.get('http://localhost:3000/admin/notes', {
+      const response = await axios.get('https://eduweb-backend-gphf.onrender.com/admin/notes', {
         headers: { 
           Authorization: `Bearer ${token}` 
         }
@@ -87,7 +87,7 @@ export const fetchAllStudents = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get('http://localhost:3000/admin/users', {
+      const response = await axios.get('https://eduweb-backend-gphf.onrender.com/admin/users', {
         headers: { Authorization: `Bearer ${token}` }
       });
       return response.data.users;
@@ -107,7 +107,7 @@ export const updateNote = createAsyncThunk(
       }
 
       const response = await axios.patch(
-        `http://localhost:3000/admin/notes/${noteId}`,
+        `https://eduweb-backend-gphf.onrender.com/admin/notes/${noteId}`,
         { ...noteData, noteId }, // Include noteId in the request body
         { 
           headers: { 
@@ -135,7 +135,7 @@ export const deleteNote = createAsyncThunk(
         return rejectWithValue({ message: 'Authentication token not found' });
       }
 
-      await axios.delete(`http://localhost:3000/admin/notes/${noteId}`, {
+      await axios.delete(`https://eduweb-backend-gphf.onrender.com/admin/notes/${noteId}`, {
         headers: { Authorization: `Bearer ${token}` },
         data: { noteId } 
       });
